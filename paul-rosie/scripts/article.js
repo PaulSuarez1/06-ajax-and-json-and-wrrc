@@ -1,6 +1,6 @@
 'use strict';
 
-function Article (rawDataObj) {
+function Article(rawDataObj) {
   this.author = rawDataObj.author;
   this.authorUrl = rawDataObj.authorUrl;
   this.title = rawDataObj.title;
@@ -14,10 +14,10 @@ Article.all = [];
 
 // DONE-COMMENT: Why isn't this method written as an arrow function?
 // This is because arrow functions do not inherit the contextual this. property and cannot change them. They only have access to the parent and nothing else.
-Article.prototype.toHtml = function() {
+Article.prototype.toHtml = function () {
   let template = Handlebars.compile($('#article-template').text());
 
-  this.daysAgo = parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000);
+  this.daysAgo = parseInt((new Date() - new Date(this.publishedOn)) / 60 / 60 / 24 / 1000);
 
   // COMMENT-DONE: What is going on in the line below? What do the question mark and colon represent? How have we seen this same logic represented previously?
   // Not sure? Check the docs!
@@ -35,7 +35,7 @@ Article.prototype.toHtml = function() {
 // COMMENT-DONE: Where is this function called? What does 'rawData' represent now? How is this different from previous labs?
 // Article.loadAll is called in the "Article.fetchAll" function on line 44. rawData is now a property of localStorage, and a parameter of Article.loadAll. In previous labs it was called in a global scope while now it is called within a function.
 Article.loadAll = articleData => {
-  articleData.sort((a,b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)))
+  articleData.sort((a, b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)))
 
   articleData.forEach(articleObject => Article.all.push(new Article(articleObject)))
   articleView.initIndexPage();
@@ -46,20 +46,21 @@ Article.fetchAll = () => {
   // REVIEW: What is this 'if' statement checking for? Where was the rawData set to local storage?
   //
   if (localStorage.rawData) {
-   var articleStorage= JSON.parse(localStorage.rawData);
+    var articleStorage = JSON.parse(localStorage.rawData);
     Article.loadAll(articleStorage);
 
   } else {
-  // we need to parse the hackerIpsum.js file in the data directory. COMMENT REQUIRED: How we determined the sequence of code execution--> We worked with Travis to help us understands how to use the code we learned in class yesterday (AJAX calls in the pokeapi and swapi api websites).
-$.ajax({
-    url:'data/hackerIpsum.json',
-    method:'GET',
-    headers:{},
-    success: function(data, message, xhr){
-    console.log(data);
+    // we need to parse the hackerIpsum.js file in the data directory. COMMENT REQUIRED: How we determined the sequence of code execution--> We worked with Travis to help us understands how to use the code we learned in class yesterday (AJAX calls in the pokeapi and swapi api websites).
+    $.ajax({
+      url: 'data/hackerIpsum.json',
+      method: 'GET',
+      headers: {},
+      success: function (data, message, xhr) {
+        console.log(data);
 
-  localStorage.setItem("rawData", JSON.stringify(data));
+        localStorage.setItem("rawData", JSON.stringify(data));
+      }
+    });
+    Article.fetchAll();
   }
-})
-Article.fetchAll();
-}};
+};
