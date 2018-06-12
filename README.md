@@ -85,9 +85,9 @@ function(data, message, xhr) {
 _Your README.md must include:_
 
 ```md
-# Project Name
+# 06 Ajax and JSON and WRRC
 
-**Author**: Your Name Goes Here
+**Author**: Paul Suarez and Rosie Olaivar
 **Version**: 1.0.0 (increment the patch/fix version number up if you make more commits past your first submission)
 
 ## Overview
