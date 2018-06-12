@@ -46,7 +46,7 @@ Article.fetchAll = () => {
   // REVIEW: What is this 'if' statement checking for? Where was the rawData set to local storage?
   //
   if (localStorage.rawData) {
-   var articleStorage= JSON.parse(localStorage.rawData);
+   var articleStorage = JSON.parse(localStorage.rawData);
     Article.loadAll(articleStorage);
 
   } else {
@@ -60,6 +60,6 @@ $.ajax({
 
   localStorage.setItem("rawData", JSON.stringify(data));
   }
-})
+});
 Article.fetchAll();
 }};
