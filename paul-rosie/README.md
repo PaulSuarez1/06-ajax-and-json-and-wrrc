@@ -85,13 +85,16 @@ function(data, message, xhr) {
 _Your README.md must include:_
 
 ```md
-# Project Name
+# Project Name: 06 Ajax and JSON and WRRC
 
-**Author**: Your Name Goes Here
-**Version**: 1.0.0 (increment the patch/fix version number up if you make more commits past your first submission)
+**Author**: Paul Suarez and Rosie Olaivar
+**Version**: 5.0.0 (increment the patch/fix version number up if you make more commits past your first submission)
 
 ## Overview
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for a Code Fellows 301 class. (i.e. What's your problem domain?) -->
+
+Overview: This project was an update to the blog which implemented JSON stringify methods and an AJAX call to get data, in this case articles, from the localStorage and push them to the user's browser.
+
 
 ## Getting Started
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
