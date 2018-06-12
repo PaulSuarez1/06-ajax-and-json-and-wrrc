@@ -38,6 +38,7 @@ Article.loadAll = articleData => {
   articleData.sort((a,b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)))
 
   articleData.forEach(articleObject => Article.all.push(new Article(articleObject)))
+  articleView.initIndexPage();
 };
 
 // DONE-REVIEW: This function will retrieve the data from either a local or remote source, and process it, then hand off control to the View.
@@ -45,17 +46,20 @@ Article.fetchAll = () => {
   // REVIEW: What is this 'if' statement checking for? Where was the rawData set to local storage?
   //
   if (localStorage.rawData) {
-
-    Article.loadAll();
+   var articleStorage= JSON.parse(localStorage.rawData);
+    Article.loadAll(articleStorage);
 
   } else {
-  // we need to parse the hackerIpsum.js file in the data directory. COMMENT REQUIRED: How we determined the sequence of code execution
-localStorage['articleData'] = 'hackerIpsum.js';
-localStorage.setItem("rawData");
-OR
-localStorage.setItem("rawData");
+  // we need to parse the hackerIpsum.js file in the data directory. COMMENT REQUIRED: How we determined the sequence of code execution--> We worked with Travis to help us understands how to use the code we learned in class yesterday (AJAX calls in the pokeapi and swapi api websites).
+$.ajax({
+    url:'data/hackerIpsum.json',
+    method:'GET',
+    headers:{},
+    success: function(data, message, xhr){
+    console.log(data);
 
-var getData = localStorage.getItem("rawData");
-Article.loadAll ? localStorage.cache
+  localStorage.setItem("rawData", JSON.stringify(data));
   }
-};
+})
+Article.fetchAll();
+}};
