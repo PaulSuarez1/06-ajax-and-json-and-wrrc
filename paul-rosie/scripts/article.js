@@ -57,10 +57,10 @@ Article.fetchAll = () => {
       headers: {},
       success: function (data, message, xhr) {
         console.log(data);
-
+        Article.loadAll(data);
         localStorage.setItem("rawData", JSON.stringify(data));
       }
     });
-    Article.fetchAll();
+
   }
 };
